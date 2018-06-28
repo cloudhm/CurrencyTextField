@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-extension NumberFormatter {
+public extension NumberFormatter {
     func formatString(from text: String) -> String? {
         if let decimial = Decimal(string: text) {
             let divisor = Decimal(sign: .plus, exponent: maximumFractionDigits, significand: 1)
@@ -20,21 +20,21 @@ extension NumberFormatter {
         return nil
     }
 }
-class CurrencyTextField : UITextField, UITextFieldDelegate {
+public class CurrencyTextField : UITextField, UITextFieldDelegate {
     var numberFormatter : NumberFormatter?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
         keyboardType = .numberPad
     }
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
         keyboardType = .numberPad
     }
     
     // MARK: UITextFieldDelegate
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if numberFormatter == nil {
             let canonical = NSLocale.canonicalLocaleIdentifier(from: "en_US@currency=USD")
             let locale = Locale(identifier: canonical)
@@ -61,7 +61,7 @@ class CurrencyTextField : UITextField, UITextFieldDelegate {
                         let removeText = NSString(string: txt).substring(with: range)
                         if removeText == formatter.groupingSeparator || removeText == formatter.decimalSeparator {
                             let newRange : NSRange = NSRange(location: range.location - 1, length: 2)
-                            return self.textField(textField, shouldChangeCharactersIn: newRange, replacementString: string)  
+                            return self.textField(textField, shouldChangeCharactersIn: newRange, replacementString: string)
                         } else {
                             updateTextField(textField, by: resultText)
                         }
