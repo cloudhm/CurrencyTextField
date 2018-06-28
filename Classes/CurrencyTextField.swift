@@ -21,7 +21,7 @@ public extension NumberFormatter {
     }
 }
 public class CurrencyTextField : UITextField, UITextFieldDelegate {
-    var numberFormatter : NumberFormatter?
+    public var numberFormatter : NumberFormatter?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
