@@ -71,7 +71,7 @@ public class CurrencyTextField : UITextField, UITextFieldDelegate {
                 } else {
                     // insert operation
                     // 1. verify insert content, number type
-                    if let _ = Int(string) {
+                    if let _ = UInt(string) {
                         updateTextField(textField, by: resultText)
                     }
                 }
